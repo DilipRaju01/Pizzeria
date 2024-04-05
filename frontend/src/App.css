@@ -36,3 +36,32 @@
     transform: rotate(360deg);
   }
 }
+
+
+/* navbar styling */
+
+.nav-link{
+  color: rgb(186, 185, 185);
+}
+.nav-link:hover{
+  color:orange;
+}
+.nav-item{
+  margin-bottom: 0;
+}
+.cart-button:hover{
+  background-color:orange !important;
+}
+input[type='checkbox'] {
+  accent-color: rgb(245, 245, 245);
+  /* outline:1px solid;  */
+  /* outline-offset: 1px; */
+  /* -moz-appearance:none;
+	-webkit-appearance:none;
+	-o-appearance:none; */
+	/* outline::after:black; */
+	/* content: none; */
+}
+.btn-outline-warning{
+  background-color: black;
+}

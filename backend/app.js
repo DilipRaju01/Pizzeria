@@ -3,9 +3,12 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
+var mongoose=require("mongoose");
+var cors=require("cors");
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var buildRouter = require('./routes/build-pizza');
+var orderRouter = require('./routes/order-pizza');
 
 var app = express();
 
@@ -18,9 +21,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
+
+//mongoose connection
+async function main() {
+  await mongoose.connect('mongodb://127.0.0.1:27017/mongoDatabase');
+  console.log("Database is connected successfully");
+}
+main().catch((error)=>console.log(error));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/pizza', buildRouter);
+app.use('/pizza', orderRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
