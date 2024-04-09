@@ -43,6 +43,9 @@
 .nav-link{
   color: rgb(186, 185, 185);
 }
+.nav-link:visited{
+  color:rgb(186, 185, 185)
+}
 .nav-link:hover{
   color:orange;
 }

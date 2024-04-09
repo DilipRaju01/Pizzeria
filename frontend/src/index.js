@@ -1,19 +1,22 @@
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle.js";
 import "../node_modules/bootstrap/dist/css/bootstrap.css";
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
-
-import Router from './components/Router.js';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+// import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { Provider } from "react-redux";
+import appStore from "./Stores/Store.js";
+import Router from "./components/Router.js";
 import { RouterProvider } from "react-router-dom";
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={Router} />
+    <Provider store={appStore}>
+      <RouterProvider router={Router} />
+    </Provider>
   </React.StrictMode>
 );
 
