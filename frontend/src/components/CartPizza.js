@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addItem1, removeItem1, reducePrice } from "../Stores/CartSlice";
+import {
+  addItemPizza,
+  removeItemPizza,
+  reducePricePizza,
+} from "../Stores/CartSlice";
 
 const CartPizza = (props) => {
   let [noOfPizzas, setNoOfPizzas] = useState(1);
@@ -8,48 +12,30 @@ const CartPizza = (props) => {
   const dispatch = useDispatch();
   const handleAdd = () => {
     setNoOfPizzas(noOfPizzas + 1);
-    dispatch(addItem1(props.pizza));
+    dispatch(addItemPizza(props.pizza));
   };
   const handleRemove = () => {
-    if (quantity.get(props.pizza.id) == 1) {
-      dispatch(removeItem1(props.pizza));
-      //   setNoOfPizzas(0);
+    if (quantity.get(props.pizza.id) === 1) {
+      dispatch(removeItemPizza(props.pizza));
     } else {
-      dispatch(reducePrice(props.pizza));
+      dispatch(reducePricePizza(props.pizza));
       setNoOfPizzas(noOfPizzas - 1);
     }
   };
   return (
-    <div
+    <tr
       className=""
-      style={{ margin: "auto", padding: "0px", border: "1px solid" }}
+      style={{
+        margin: "auto",
+        padding: "20px",
+        border: "1px solid #fcd6b8",
+      }}
     >
-      {/* <table
-          className=""
-          style={{
-            marginTop: "50px",
-            display: "inline-block",
-            // marginBottom: "20px",
-            verticalAlign: "middle",
-            border: "1px solid",
-            // borderStyle: "outset",
-            height: "150px",
-
-            //   padding: "0px",
-          }}
-        > */}
-      {/* <tr>
-            <th>Pizza</th>
-            <th>Quantity</th>
-            <th>Price</th>
-          </tr> */}
-
       <td
         style={{
           textAlign: "center",
           padding: "5px",
           width: "150px",
-          //   border: "1px solid",
         }}
       >
         <p className="h4">{props.pizza.name}</p>
@@ -66,14 +52,9 @@ const CartPizza = (props) => {
       <td style={{ textAlign: "center", padding: "5px", width: "150px" }}>
         <img
           src={props.pizza.image}
+          alt="pizzaImage"
           style={{ width: "100px", height: "100px", borderRadius: "100%" }}
         />
-        {/* <button
-            onClick={() => handleClick(props.pizza)}
-            className="btn btn-warning"
-          >
-            Add to Cart
-          </button> */}
       </td>
       <td style={{ padding: "5px", width: "150px" }}>
         <button className="btn btn-warning" onClick={() => handleRemove()}>
@@ -95,21 +76,11 @@ const CartPizza = (props) => {
         </button>
       </td>
       <td style={{ padding: "5px", width: "150px" }}>
-        {/* <p>{props.pizza.description}</p>
-          <p>
-            <strong>Ingredients : </strong>
-            {props.pizza.ingredients.join(",")}
-          </p>
-          <p>
-            <strong>Toppings : </strong>
-            {props.pizza.topping.join(",")}
-          </p> */}
         <p className="h5">
           ₹{props.pizza.price.toFixed(2) * quantity.get(props.pizza.id)}
         </p>
       </td>
-      {/* </table> */}
-    </div>
+    </tr>
   );
 };
 

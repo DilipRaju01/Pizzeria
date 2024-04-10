@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-// import Footer from "./Footer";
 import PizzaCard from "./PizzaCard";
 const OrderPizza = () => {
   let [pizzas, setPizzas] = useState([]);
@@ -9,7 +8,6 @@ const OrderPizza = () => {
       .get("http://localhost:5000/pizza/order-pizza")
       .then((res) => {
         setPizzas(res.data);
-        // console.log(pizzas);
       })
       .catch((error) => console.log(error));
   }, []);

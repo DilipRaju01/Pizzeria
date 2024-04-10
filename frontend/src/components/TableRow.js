@@ -1,36 +1,14 @@
-import { useState } from "react";
-import { addItem2 } from "../Stores/CartSlice";
+import { addItemIngredients, removeItemIngredients } from "../Stores/CartSlice";
 import { useDispatch } from "react-redux";
 export default function TableRow(props) {
-  let [ingredients, setIngredients] = useState([]);
-
-  // let [isChecked, setIsChecked] = useState(false);
   const dispatch = useDispatch();
 
   const handleCheck = (e) => {
-    // console.log(e.target.checked);
     if (e.target.checked) {
-      // setIsChecked(true);
-      setIngredients([props.ingredient]);
-      dispatch(addItem2(props.ingredient));
-      // console.log(props.ingredient, ingredients);
-      // } else {
-      //   setIsChecked(false);
-      //   setIngredients(
-      //     ingredients.filter((ingredient) => {
-      //       return ingredient !== props.ingredient;
-      //     })
-      //   );
-      //   // dispatch(addItem2(ingredients));
+      dispatch(addItemIngredients(props.ingredient));
+    } else {
+      dispatch(removeItemIngredients(props.ingredient));
     }
-    // else {
-    //   setIngredients(
-    //     ingredients.filter((ingredient) => {
-    //       return ingredient !== props.ingredient;
-    //     })
-    //   );
-    //   dispatch(addItem2(ingredient));
-    // }
   };
   return (
     <tr style={{ verticalAlign: "middle" }}>
@@ -56,7 +34,6 @@ export default function TableRow(props) {
           &nbsp; Add
         </p>
       </td>
-      {/* <td>{props.ingredient.rating}</td> */}
     </tr>
   );
 }

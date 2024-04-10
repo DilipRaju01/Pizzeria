@@ -37,6 +37,7 @@ const Story = () => {
             <img
               width="400px"
               height="350px"
+              alt="storyImage"
               src="https://image.shutterstock.com/z/stock-photo-raw-dough-for-pizza-with-ingredients-and-spices-on-table-526830277.jpg"
             ></img>
           </td>
@@ -65,6 +66,7 @@ const Story = () => {
             <img
               width="500px"
               height="350px"
+              alt="storyImage"
               src="https://thumb1.shutterstock.com/display_pic_with_logo/2982127/437116033/stock-photo-happy-chef-437116033.jpg"
             ></img>
           </td>
@@ -74,6 +76,7 @@ const Story = () => {
             <img
               width="500px"
               height="300px"
+              alt="storyImage"
               src="https://thumb9.shutterstock.com/display_pic_with_logo/175989610/669255388/stock-photo-vintage-analog-kitchen-countdown-timer-with-classical-clock-face-and-red-remaining-time-display-669255388.jpg"
             ></img>
           </td>

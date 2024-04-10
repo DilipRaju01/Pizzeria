@@ -1,122 +1,198 @@
 import { useDispatch, useSelector } from "react-redux";
-// import { ProductsCard } from "./ProductsCard";
 import { clearCart } from "../Stores/CartSlice";
-// import Card from "./Card";
-// import CakeCard from "./CakeCard";
-// import PizzaCard from "./PizzaCard";
 import CartPizza from "./CartPizza";
-import TableRow from "./TableRow";
 import CartIngredients from "./CartIngredients";
-// import { useState } from "react";
+import Lottie from "react-lottie";
+import emptyCartAnimation from "../animations/EmptyCartAnimation.json";
+import orderPlacedAnimation from "../animations/OrderPlacedAnimation.json";
+import { useState } from "react";
+import OrderSummary from "./OrderSummary";
+import OrderSummaryIngredients from "./OrderSummaryIngredients";
 
 const Cart = () => {
-  const items1 = useSelector((store) => store.cart.items1);
-  const items2 = useSelector((store) => store.cart.items2);
+  const defaultOptionsEmptyCart = {
+    loop: true,
+    autoplay: true,
+    animationData: emptyCartAnimation,
+    renderer: "svg",
+  };
+  const defaultOptionsPlaceOrder = {
+    loop: true,
+    autoplay: true,
+    animationData: orderPlacedAnimation,
+    renderer: "svg",
+  };
+  const pizzas = useSelector((store) => store.cart.pizzas);
+  const ingredients = useSelector((store) => store.cart.ingredients);
   const totalAmount = useSelector((store) => store.cart.cartTotal);
-  //   console.log(items2);
+  const ingredientsTotal = useSelector((store) => store.cart.ingredientsTotal);
+  const pizzaTotal = useSelector((store) => store.cart.pizzaTotal);
+  let [isOrderPlaced, setIsOrderPlaced] = useState(false);
   const dispatch = useDispatch();
-  const handleClick = () => {
+  const handleClickClear = () => {
     dispatch(clearCart());
+  };
+  const handleClickPlaceOrder = () => {
+    setIsOrderPlaced(true);
   };
   return (
     <div
       className=""
-      style={{ display: "inline-block", margin: "auto", width: "100%" }}
+      style={{
+        display: "inline-block",
+        margin: "auto",
+        width: "100%",
+        height: "200vh",
+        backgroundColor: "#fcd6b8",
+      }}
     >
-      <table
-        style={{
-          width: "100%",
-          verticalAlign: "top",
-          textAlign: "center",
-          marginTop: "50px",
-        }}
-      >
-        <td>
-          <p className="h2">Pizzas</p>
-          <table
-            // className="table table-striped"
-            style={{
-              width: "600px",
-              // marginLeft: "10%",
-              margin: "auto",
-              // marginTop: "50px",
-              display: "inline-block",
-              // marginBottom: "20px",
-              textAlign: "center",
-              verticalAlign: "middle",
-              // border: "1px solid",
-              // padding: "auto",
-              // borderRadius: "2%",
-              // borderStyle: "outset",
-              // height: "150px",
+      {!isOrderPlaced ? (
+        pizzas.length + ingredients.length > 0 ? (
+          <div>
+            <div style={{ textAlign: "center", marginTop: "50px" }}>
+              <h3>
+                The Cart Total is :{" "}
+                <span className="h3 text-success">
+                  ₹{totalAmount.toFixed(2)}
+                </span>
+              </h3>
+              <button
+                onClick={handleClickClear}
+                style={{ margin: "20px" }}
+                className="btn btn-danger"
+              >
+                Clear Cart
+              </button>
+              <button onClick={handleClickPlaceOrder} className="btn btn-info">
+                Place Order
+              </button>
+            </div>
+            <table
+              style={{
+                width: "100%",
+                verticalAlign: "top",
+                textAlign: "center",
+                marginTop: "50px",
+              }}
+            >
+              <td>
+                <p className="h2">Pizzas</p>
+                <table
+                  style={{
+                    backgroundColor: "#fcb57e",
+                    width: "600px",
+                    margin: "auto",
 
-              //   padding: "0px",
-            }}
-          >
-            {items1.length > 0 ? (
-              items1.map((pizza, index) => {
-                return <CartPizza key={index} pizza={pizza} />;
-              })
-            ) : (
-              <tr>
-                <td>
-                  No pizzas are added to the card. Try adding pizzas to view
-                  them in the cart.
-                </td>
-              </tr>
-            )}
-          </table>
-        </td>
-        <td>
-          <p className="h2">Toppings</p>
-          <table
-            className=""
-            style={{
-              display: "inline-block",
-              // marginLeft: "10%",
-              width: "400px",
-              textAlign: "center",
-              margin: "auto",
-              // marginTop: "50px",
+                    display: "inline-block",
 
-              // width: "600px",
-              // marginTop: "50px",
-              // display: "inline-block",
-              // marginBottom: "20px",
-              // textAlign: "center",
-              verticalAlign: "middle",
-              border: "1px solid",
-              // padding: "auto",
-            }}
-          >
-            {items2.length > 0 ? (
-              items2.map((ingredient, index) => {
-                console.log(items2);
-                return <CartIngredients key={index} ingredient={ingredient} />;
-              })
-            ) : (
-              <tr>
-                <td>
-                  No Toppings are added to the card. Try adding Toppings to
-                  customise your pizza.
-                </td>
-              </tr>
-            )}
-            <p className="h2">Toppings Total : {}</p>
-          </table>
-        </td>
-      </table>
-      {items1.length + items2.length === 0 ? (
-        <h3>The Cart is empty.</h3>
+                    textAlign: "center",
+                    verticalAlign: "middle",
+
+                    borderRadius: "10px",
+                  }}
+                >
+                  {pizzas.length > 0 ? (
+                    pizzas.map((pizza, index) => {
+                      return <CartPizza key={index} pizza={pizza} />;
+                    })
+                  ) : (
+                    <tr>
+                      <td style={{ padding: "20px" }}>
+                        No pizzas are added to the cart. Try adding pizzas to
+                        view them in the cart.
+                      </td>
+                    </tr>
+                  )}
+                  <p
+                    style={{ marginTop: "20px", marginBottom: "20px" }}
+                    className="h2"
+                  >
+                    Pizza's Total :{" "}
+                    <span className="text-success">₹{pizzaTotal}</span>
+                  </p>
+                </table>
+              </td>
+              <td>
+                <p className="h2">Toppings</p>
+                <table
+                  className=""
+                  style={{
+                    backgroundColor: "#fcb57e",
+                    display: "inline-block",
+                    width: "400px",
+                    textAlign: "center",
+                    margin: "auto",
+                    verticalAlign: "middle",
+                    border: "1px solid #fcd6b8",
+                    borderRadius: "10px",
+                    padding: "20px",
+                  }}
+                >
+                  {ingredients.length > 0 ? (
+                    ingredients.map((ingredient, index) => {
+                      return (
+                        <CartIngredients key={index} ingredient={ingredient} />
+                      );
+                    })
+                  ) : (
+                    <tr>
+                      <td>
+                        No Toppings are added to the cart. Try adding Toppings
+                        to customise your pizza.
+                      </td>
+                    </tr>
+                  )}
+                  <p style={{ marginTop: "20px" }} className="h2">
+                    Toppings Total :{" "}
+                    <span className="text-success">₹{ingredientsTotal}</span>
+                  </p>
+                </table>
+              </td>
+            </table>
+          </div>
+        ) : (
+          <div style={{ textAlign: "center", marginTop: "100px" }}>
+            <Lottie
+              options={defaultOptionsEmptyCart}
+              height={300}
+              width={300}
+            />
+            <p className="h3">
+              Cart is Empty. Try adding Pizza's from our collection or customize
+              your own pizza.
+            </p>
+          </div>
+        )
       ) : (
-        <h3>
-          The Cart Total is :{" "}
-          <span className="h3 text-success">₹{totalAmount.toFixed(2)}</span>
-        </h3>
+        <div>
+          <Lottie options={defaultOptionsPlaceOrder} height={500} width={500} />
+          <table
+            style={{
+              borderRadius: "10px",
+              width: "400px",
+              margin: "auto",
+              marginTop: "50px",
+            }}
+          >
+            <thead>
+              <tr style={{ border: "1px solid black" }}>
+                <th style={{ width: "200px" }}>Name</th>
+                <th style={{ width: "100px" }}>Quantity</th>
+                <th style={{ width: "100px" }}>Price</th>
+              </tr>
+            </thead>
+            {pizzas.map((pizza, index) => (
+              <OrderSummary key={index} pizza={pizza} />
+            ))}
+            {ingredients.map((ingredient, index) => (
+              <OrderSummaryIngredients key={index} ingredient={ingredient} />
+            ))}
+            <tr style={{ border: "1px solid black" }}>
+              <td>Total Amount Paid : {totalAmount}</td>
+            </tr>
+          </table>
+        </div>
       )}
-      <button onClick={handleClick} className="btn btn-info">
-        Clear Cart
-      </button>
     </div>
   );
 };

@@ -37,34 +37,32 @@
   }
 }
 
-
 /* navbar styling */
 
-.nav-link{
+.nav-link {
   color: rgb(186, 185, 185);
 }
-.nav-link:visited{
-  color:rgb(186, 185, 185)
+.nav-link:visited {
+  color: rgb(186, 185, 185);
 }
-.nav-link:hover{
-  color:orange;
+.nav-link:hover {
+  color: orange;
 }
-.nav-item{
+.nav-item {
   margin-bottom: 0;
 }
-.cart-button:hover{
-  background-color:orange !important;
+.cart-button:hover {
+  background-color: orange !important;
 }
-input[type='checkbox'] {
+.btn-warning:hover {
+  background-color: chocolate;
+}
+.btn-outline-warning:hover {
+  background-color: chocolate;
+}
+input[type="checkbox"] {
   accent-color: rgb(245, 245, 245);
-  /* outline:1px solid;  */
-  /* outline-offset: 1px; */
-  /* -moz-appearance:none;
-	-webkit-appearance:none;
-	-o-appearance:none; */
-	/* outline::after:black; */
-	/* content: none; */
 }
-.btn-outline-warning{
+.btn-outline-warning {
   background-color: black;
 }

@@ -1,9 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-// import cartLogo from '/assets/shopping-cart.svg';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faCartShopping } from '@awesome.me/kit-KIT_CODE/icons/classic/solid'
-// import PizzerialLogo from '/assets/PizzerialLogo.png'
 
 const Navbar = () => {
   return (
@@ -21,7 +17,6 @@ const Navbar = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarSupportedContent">
-          {/* <p className='text-secondary'>pizza</p> */}
           <ul className="navbar-nav me-auto mb-2 mb-lg-0">
             <li className="nav-item text-light h4">
               <Link className="nav-link" to="/">

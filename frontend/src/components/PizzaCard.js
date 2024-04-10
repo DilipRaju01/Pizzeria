@@ -1,19 +1,16 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addItem1, removeItem1 } from "../Stores/CartSlice";
+import { addItemPizza } from "../Stores/CartSlice";
 
 const PizzaCard = (props) => {
   const dispatch = useDispatch();
   let [isAddedToCart, setIsAddedToCart] = useState(false);
   const handleClickAdd = (item) => {
     setIsAddedToCart(true);
-    dispatch(addItem1(item));
-    // console.log(item);
+    dispatch(addItemPizza(item));
   };
   const handleClickRemove = (item) => {
     setIsAddedToCart(false);
-    // dispatch(removeItem1(item));
-    // console.log(item);
   };
   return (
     <div className="col-lg-6" style={{ margin: "auto", padding: "0px" }}>
@@ -25,7 +22,6 @@ const PizzaCard = (props) => {
           border: "2px",
           borderStyle: "outset",
           height: "320px",
-          //   padding: "0px",
         }}
       >
         <td style={{ textAlign: "center", padding: "5px" }}>
@@ -55,6 +51,7 @@ const PizzaCard = (props) => {
         <td style={{ textAlign: "center", padding: "5px" }}>
           <img
             src={props.pizza.image}
+            alt="pizzaImage"
             style={{ width: "150px", height: "150px" }}
           />
           {!isAddedToCart ? (
@@ -67,9 +64,9 @@ const PizzaCard = (props) => {
           ) : (
             <button
               onClick={() => handleClickRemove(props.pizza)}
-              className="btn btn-success"
+              className="btn btn-outline-warning"
             >
-              Added to Cart
+              ✔ Added
             </button>
           )}
         </td>

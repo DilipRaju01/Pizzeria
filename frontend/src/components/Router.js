@@ -2,7 +2,6 @@ import App from "../App";
 import OrderPizza from "./OrderPizza";
 import BuildPizza from "./BuildPizza";
 import { createBrowserRouter } from "react-router-dom";
-// import Footer from "./Footer";
 import Story from "./Story";
 import Cart from "./Cart";
 
