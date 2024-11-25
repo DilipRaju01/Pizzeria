@@ -25,7 +25,8 @@ app.use(cors());
 
 //mongoose connection
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/mongoDatabase');
+  await mongoose.connect('mongodb+srv://edgdileep8621:qXLcU41VP1ayi2CM@cluster0.mczof.mongodb.net/mongoDatabase?retryWrites=true&w=majority&appName=Cluster0')
+  // await mongoose.connect('mongodb://127.0.0.1:27017/mongoDatabase');
   console.log("Database is connected successfully");
 }
 main().catch((error)=>console.log(error));
